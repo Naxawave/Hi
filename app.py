@@ -25,7 +25,7 @@ serializer = Serializer(app.secret_key, salt='password-reset-salt')
 # Función para enviar correos
 def enviar_email(destinatario, asunto, cuerpo):
     mensaje = Mail(
-        from_email='tu correo remitente que creaste en SendGrid aquí',  # Cambia esto por tu correo
+        from_email='alanmoralespaliza81@gmail.com',  # Cambia esto por tu correo
         to_emails=destinatario,
         subject=asunto,
         html_content=cuerpo
