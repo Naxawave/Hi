@@ -8,146 +8,146 @@ from itsdangerous import URLSafeTimedSerializer as Serializer
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
-# Clave secreta para sesiones
+# Secret key for sessions
 app.secret_key = "advpjsh"
 
-# Configuración de MongoDB Atlas
+# MongoDB Atlas configuration
 client = MongoClient("mongodb+srv://Naxawave:alan2008@hicluster.pqqve.mongodb.net/?retryWrites=true&w=majority&appName=HiCluster")
-db = client['Naxawave'] #Nombre de tu base de datos aquí
-collection = db['users'] #Nombre de tu colección aquí
+db = client['Naxawave']  # Name of your database here
+collection = db['users']  # Name of your collection here
 
-# Configuración de SendGrid
-SENDGRID_API_KEY = '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' 
+# SendGrid configuration
+SENDGRID_API_KEY = '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'
 
-# Serializador para crear y verificar tokens
+# Serializer to create and verify tokens
 serializer = Serializer(app.secret_key, salt='password-reset-salt')
 
-# Función para enviar correos
-def enviar_email(destinatario, asunto, cuerpo):
-    mensaje = Mail(
-        from_email='alanmoralespaliza81@gmail.com',  # Cambia esto por tu correo
-        to_emails=destinatario,
-        subject=asunto,
-        html_content=cuerpo
+# Function to send emails
+def send_email(recipient, subject, body):
+    message = Mail(
+        from_email='alanmoralespaliza81@gmail.com',  # Change this to your email
+        to_emails=recipient,
+        subject=subject,
+        html_content=body
     )
     try:
-        sg = SendGridAPIClient(SENDGRID_API_KEY)  # Usa tu clave API de SendGrid directamente
-        response = sg.send(mensaje)
-        print(f"Correo enviado con éxito! Status code: {response.status_code}")
+        sg = SendGridAPIClient(SENDGRID_API_KEY)  # Use your SendGrid API key directly
+        response = sg.send(message)
+        print(f"Email sent successfully! Status code: {response.status_code}")
     except Exception as e:
-        print(f"Error al enviar el correo: {e}")
+        print(f"Error sending email: {e}")
 
 @app.route('/')
 def home():
-    if 'usuario' not in session:
+    if 'user' not in session:
         return redirect(url_for('login'))
-    return redirect(url_for('pagina_principal'))
+    return redirect(url_for('main_page'))
 
-@app.route('/registro', methods=['GET', 'POST'])
-def registro():
+@app.route('/register', methods=['GET', 'POST'])
+def register():
     if request.method == 'POST':
-        usuario = request.form['usuario']
+        username = request.form['username']
         email = request.form['email']
-        contrasena = request.form['contrasena']
+        password = request.form['password']
 
-        # Verificar si el correo ya está registrado
+        # Check if the email is already registered
         if collection.find_one({'email': email}):
-            flash("El correo electrónico ya está registrado.")
-            return redirect(url_for('registro'))
+            flash("The email is already registered.")
+            return redirect(url_for('register'))
 
-        # Hashear la contraseña
-        hashed_password = bcrypt.generate_password_hash(contrasena).decode('utf-8')
+        # Hash the password
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-        # Insertar usuario en la base de datos
+        # Insert user into the database
         collection.insert_one({
-            'usuario': usuario,
+            'username': username,
             'email': email,
-            'contrasena': hashed_password
+            'password': hashed_password
         })
         
-        session['usuario'] = usuario
-        return redirect(url_for('pagina_principal'))
+        session['user'] = username
+        return redirect(url_for('main_page'))
 
     return render_template('register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        usuario = request.form['usuario']
-        contrasena = request.form['contrasena']
+        username = request.form['username']
+        password = request.form['password']
 
-        # Buscar al usuario en la base de datos
-        user = collection.find_one({'usuario': usuario})
+        # Search for the user in the database
+        user = collection.find_one({'username': username})
         
-        # Verificar si las credenciales son correctas
-        if user and bcrypt.check_password_hash(user['contrasena'], contrasena):
-            session['usuario'] = usuario
-            return redirect(url_for('pagina_principal'))
+        # Verify if the credentials are correct
+        if user and bcrypt.check_password_hash(user['password'], password):
+            session['user'] = username
+            return redirect(url_for('main_page'))
         else:
-            flash("Usuario o contraseña incorrectos.")
+            flash("Incorrect username or password.")
             return render_template('login.html')
 
     return render_template('login.html')
 
-@app.route('/pagina_principal')
-def pagina_principal():
-    if 'usuario' not in session:
+@app.route('/main_page')
+def main_page():
+    if 'user' not in session:
         return redirect(url_for('login'))
-    return render_template('index.html', usuario=session['usuario'])
+    return render_template('index.html', user=session['user'])
 
-@app.route('/mi_perfil')
-def mi_perfil():
-    if 'usuario' not in session:
+@app.route('/my_profile')
+def my_profile():
+    if 'user' not in session:
         return redirect(url_for('login'))
     
-    usuario = session['usuario']
-    user_data = collection.find_one({'usuario': usuario})
-    return render_template('mi_perfil.html', usuario=user_data['usuario'], email=user_data['email'])
+    username = session['user']
+    user_data = collection.find_one({'username': username})
+    return render_template('my_profile.html', username=user_data['username'], email=user_data['email'])
 
-@app.route('/recuperar_contrasena', methods=['GET', 'POST'])
-def recuperar_contrasena():
+@app.route('/recover_password', methods=['GET', 'POST'])
+def recover_password():
     if request.method == 'POST':
         email = request.form['email']
-        usuario = collection.find_one({'email': email})
+        user = collection.find_one({'email': email})
 
-        if usuario:
+        if user:
             token = serializer.dumps(email, salt='password-reset-salt')
-            enlace = url_for('restablecer_contrasena', token=token, _external=True)
-            asunto = "Recuperación de contraseña"
-            cuerpo = f"""
-            <p>Hola, hemos recibido una solicitud para restablecer tu contraseña.</p>
-            <p>Si no has solicitado este cambio, ignora este mensaje.</p>
-            <p>Para restablecer tu contraseña, haz clic en el siguiente enlace:</p>
-            <a href="{enlace}">Restablecer contraseña</a>
+            link = url_for('reset_password', token=token, _external=True)
+            subject = "Password Recovery"
+            body = f"""
+            <p>Hello, we have received a request to reset your password.</p>
+            <p>If you did not make this request, please ignore this message.</p>
+            <p>To reset your password, click the link below:</p>
+            <a href="{link}">Reset Password</a>
             """
-            enviar_email(email, asunto, cuerpo)
-            flash("Te hemos enviado un correo para recuperar tu contraseña.", "success")
+            send_email(email, subject, body)
+            flash("We have sent you an email to recover your password.", "success")
         else:
-            flash("El correo electrónico no está registrado.", "error")
+            flash("The email is not registered.", "error")
 
-    return render_template('recuperar_contrasena.html')
+    return render_template('recover_password.html')
 
-@app.route('/restablecer_contrasena/<token>', methods=['GET', 'POST'])
-def restablecer_contrasena(token):
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
     try:
         email = serializer.loads(token, salt='password-reset-salt', max_age=3600)
     except:
-        flash("El enlace de restablecimiento ha caducado o es inválido.", "error")
-        return redirect(url_for('recuperar_contrasena'))
+        flash("The reset link has expired or is invalid.", "error")
+        return redirect(url_for('recover_password'))
 
     if request.method == 'POST':
-        nueva_contrasena = request.form['nueva_contrasena']
-        hashed_password = bcrypt.generate_password_hash(nueva_contrasena).decode('utf-8')
-        collection.update_one({'email': email}, {'$set': {'contrasena': hashed_password}})
-        flash("Tu contraseña ha sido restablecida con éxito.", "success")
+        new_password = request.form['new_password']
+        hashed_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+        collection.update_one({'email': email}, {'$set': {'password': hashed_password}})
+        flash("Your password has been successfully reset.", "success")
         return redirect(url_for('login'))
 
-    return render_template('restablecer_contrasena.html')
+    return render_template('reset_password.html')
 
 @app.route('/logout')
 def logout():
-    session.pop('usuario', None)
+    session.pop('user', None)
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=True)

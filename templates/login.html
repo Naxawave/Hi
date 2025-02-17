@@ -1,9 +1,9 @@
-i<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
+    <title>Login</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/styles.css">
     <script defer src="../static/app.js"></script>
@@ -11,12 +11,12 @@ i<!DOCTYPE html>
 <body>
     <div class="login-container">
         <form class="login-form" action="/login" method="POST">
-            <h2>Iniciar Sesión</h2>
+            <h2>Login</h2>
 
-            <!-- Mostrar mensaje de error o éxito -->
+            <!-- Show error or success message -->
             {% with messages = get_flashed_messages() %}
             {% if messages %}
-                <div class="flash-message {{ 'success-message' if 'Tu contraseña ha sido restablecida con éxito' in messages[0] else 'error-message' }}">
+                <div class="flash-message {{ 'success-message' if 'Your password has been successfully reset' in messages[0] else 'error-message' }}">
                     {% for message in messages %}
                         {{ message }}
                     {% endfor %}
@@ -26,22 +26,22 @@ i<!DOCTYPE html>
 
             <div class="form-group">
                 <i class="fas fa-user icon"></i>
-                <input type="text" name="usuario" placeholder="Usuario" required>
+                <input type="text" name="usuario" placeholder="Username" required>
             </div>
 
             <div class="form-group password-group">
                 <i class="fas fa-lock icon"></i>
-                <input type="password" name="contrasena" placeholder="Contraseña" id="password" required>
+                <input type="password" name="contrasena" placeholder="Password" id="password" required>
                 <i class="toggle-password" id="togglePassword"></i>
             </div>
 
-            <button type="submit" class="btn">Iniciar Sesión</button>
+            <button type="submit" class="btn">Login</button>
 
-            <!-- Enlace para recuperación de contraseña -->
-            <p class="forgot-password"><a href="/recuperar_contrasena">¿Olvidaste tu contraseña?</a></p>
+            <!-- Link for password recovery -->
+            <p class="forgot-password"><a href="/recover_password">Forgot your password?</a></p>
 
             <div class="signup-link">
-                <p>¿No tienes cuenta? <a href="/registro" class="signup-text">¡Crea una ahora aquí!</a></p>
+                <p>Don't have an account? <a href="/register" class="signup-text">Create one now here!</a></p>
             </div>
         </form>
     </div>
