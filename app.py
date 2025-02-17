@@ -12,8 +12,8 @@ bcrypt = Bcrypt(app)
 app.secret_key = "advpjsh"
 
 # Configuración de MongoDB Atlas
-client = MongoClient("mongodb+srv://Naxawave:alan2008:D@hicluster.pqqve.mongodb.net/?retryWrites=true&w=majority&appName=HiCluster")
-db = client['HiDB_01'] #Nombre de tu base de datos aquí
+client = MongoClient("mongodb+srv://Naxawave:alan2008@hicluster.pqqve.mongodb.net/?retryWrites=true&w=majority&appName=HiCluster")
+db = client['Naxawave'] #Nombre de tu base de datos aquí
 collection = db['users'] #Nombre de tu colección aquí
 
 # Configuración de SendGrid
