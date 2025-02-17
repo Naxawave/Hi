@@ -1,0 +1,370 @@
+.app_container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content_apps{
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  width: 98%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card_tutorial{
+  border-bottom: 1px solid #A6A6A6;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  height: auto;
+  padding: 10px;
+  width: 100%;
+}
+
+.card_tutorial_info{
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.card_channel_img{
+  width: 12%;
+}
+
+.card_channel_img img{
+  width: 100%;
+  border-radius: 200px;
+}
+
+.card_img img{
+  border-radius: 20px;
+}
+
+.card_img.miniature{
+  width: 100%;
+}
+
+.card_title{
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+  margin-left: 8px;
+  margin-right: 10px;
+  width: 55%;
+  height: 8vh;
+  overflow-wrap: break-word;
+  white-space: normal;
+  font-size: 12px;
+}
+
+
+.card_description {
+  margin: 4px auto;
+  padding: 15px;
+  width: 100%;
+  height: 20vh;
+  border-radius: 4px 4px 20px 20px;
+  background: var(--content-color);
+  font-size: 14px;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-y: scroll;
+}
+
+.content_buttons{
+  display: relative;
+  right: 0;
+  bottom: 12%;
+  position: absolute;
+}
+
+.card_button{
+  display: flex;
+  align-items: center;
+  text-wrap: nowrap;
+  border-radius: 50px;
+  color: white;
+  padding: 10px;
+  background: var(--primary-color);
+}
+
+.card_open{
+  padding-right: 8px;
+  border-right: 1px solid white;
+}
+
+.card_button button{
+  border: none;
+  color: white;
+  font-size: 18px;
+  background: var(--primary-color);
+}
+
+.about__content{
+  display: flex;
+}
+.card_button button i{
+  font-size: 20px;
+}
+
+.action_buttons{
+  font-size: 14px;
+  padding: 6px;
+  color: var(--container-color);
+  background: var(--content-color);
+  border-radius: 20px 20px 4px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action_buttons span{
+  padding: 8px 12px;
+}
+
+.save_button_click.left{
+  border-radius: 20px 4px 4px 20px;
+}
+
+.save_button_click.right{
+  margin-left: -2px;
+  border-radius: 4px 20px 20px 4px;
+}
+
+
+.link_container{
+  margin-top: 8px;
+  border-radius: 20px;
+  height: auto;
+  width: 100%;
+}
+
+.link_card{
+  background: var(--content-color);
+  margin-top: 4px;
+  width: 100%;
+  height: 15vh;
+  border-radius: 20px;
+  
+  display: flex;
+  align-items: center
+}
+
+.link_card.default{
+  border-radius: 4px;
+}
+
+.link_card.top{
+  border-radius: 20px 20px 4px 4px;
+}
+
+.link_card.bottom{
+  border-radius: 4px 4px 20px 20px;
+}
+
+.link_page_icon{
+  margin-left: 10px;
+  width: 20%;
+}
+
+.link_page_icon img{
+  width: 100%;
+}
+
+.link_page_url{
+  font-size: 16px;
+  margin-left: 8px;
+  width: 75%;
+  padding: 6px;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.cardCodeContainer{
+  background: var(--content-color);
+  margin-top: 8px;
+  width: 100%;
+  height: 8vh;
+  border-radius: 20px;
+  
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardCodeContainer.show{
+  display: flex;
+}
+.save_button_click{
+  background: var(--primary-color);
+  color: var(--always-white);
+  padding: 8px;
+  margin: 4px;
+  border-radius: 20px;
+}
+
+.subcontent_card{
+  display: flex;
+}
+.author_card{
+  margin-right: 4px;
+}
+.duration__card{
+  margin-left: 4px;
+}
+
+.card_container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+/*=============== SEETINGS  ===============*/
+
+.settings_area{
+  width: 100%;
+  height: 100%;
+  top: var(--header-height);
+  margin: 20px auto
+}
+
+.option_content.top{
+  border-radius: 20px 20px 4px 4px;
+}
+.option_content.bottom{
+  border-radius: 4px 4px 20px 20px;
+}
+
+.option_content {
+  margin: 2px auto;
+  background: var(--content-color);
+  color: var(--text-color);
+  width: 100%;
+  height: auto;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.option_drop_down{
+  display: none;
+}
+
+.option_drop_down.show{
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+}
+
+.option_home_settings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+}
+
+.option_home_settings i.icon{
+  background: var(--body-color);
+  padding: 10px;
+  margin-right: 4px;
+  border: solid 2px #44444400;
+  border-radius: 50px;
+}
+
+.option_home_settings h3 {
+  margin: 0;
+  color: var(--title-color);
+}
+
+.activator button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: var(--primary-color);
+  color: var(--container-color);
+}
+
+
+/*AD*/
+
+.section.ads{
+  display: none;
+  height: auto;
+}
+.ad {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+}
+
+.ad_content {
+  width: 96%;
+}
+
+.ad_content video {
+  width: 100%;
+}
+
+
+/*MODALS*/
+
+/* Estilo base del modal */
+.modal-overlay,
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00000030;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-out;
+}
+
+.modal-overlay.show,
+.overlay.show{
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  position: fixed;
+  border-radius: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(30px);
+  background: var(--body-color);
+  box-shadow: 0 4px 8px #00000030;
+  padding: 20px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.1s ease-out;
+  width: 90%;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+.modal.hide {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -50%) translateY(-30px);
+}
+
+.modal-content {
+  
+}

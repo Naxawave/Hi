@@ -1,0 +1,456 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+  /*========== Colors ==========*/
+  --first-color: #8A8A8A;
+  --first-color-shape: #000000;
+  --second-color: #3993FF;
+  --content-color: #EEEEEE;
+  --title-color: #242424;
+  --button-color: #242424;
+  --primary-color: #242424;
+  --text-color: #666666;
+  --body-color: #F9F9F9;
+  --container-color: #FFFFFF;
+  --title-color-dark: #F1F1F1;
+  --text-color-dark: #393939;
+  --container-color-dark: #000000;
+
+  /*========== Font and typography ==========*/
+  --body-font: 'Poppins', sans-serif;
+  --big-font-size: 1.5rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  /*========== z index ==========*/
+  --z-fixed: 100;
+}
+
+@media screen and (min-width: 968px) {
+  :root {
+    --big-font-size: 2rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+  }
+}
+
+/*=============== BASE ===============*/
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+* {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+html.no_scroll{
+  overflow-y: hidden;
+}
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+body.form {
+  font-family: Arial, sans-serif;
+  background-color: #FFFDFD;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+body.saved {
+  height: 100vh;
+}
+
+h1, h2, h3 {
+  color: var(--title-color);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+main{
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container_until {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  height: 80vh;
+}
+
+.title_section{
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.section {
+  padding: 4rem 0 1rem;
+}
+
+.section__height{
+  height: auto;
+}
+
+/*=============== HEADER Y NAV ===============*/
+.nav {
+  background-color: var(--container-color-dark);
+  padding-top: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.nav__shape {
+  width: 200px;
+  height: 200px;
+  background-color: var(--first-color-shape);
+  border-radius: 50%;
+  position: absolute;
+  top: -2rem;
+  left: -2rem;
+  filter: blur(90px);
+}
+
+.nav__close {
+  position: relative;
+  display: inline-flex;
+  font-size: 1.8rem;
+  color: var(--text-color-dark);
+  cursor: pointer;
+  margin-bottom: 3.5rem;
+}
+
+.nav__img {
+  width: 100%;
+}
+
+.nav__mask {
+  width: 80px;
+  height: 80px;
+  background: #FFFFFF;
+  border-radius: 1000px ;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+
+.nav__data {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.nav__greeting {
+  display: block;
+  color: var(--text-color-dark);
+  font-size: var(--small-font-size);
+  font-weight: 500;
+  margin-bottom: .25rem;
+}
+
+.nav__name {
+  color: var(--title-color-dark);
+  font-size: var(--big-font-size);
+  line-height: 130%;
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+}
+
+.nav__link {
+  color: var(--text-color-dark);
+  display: inline-flex;
+  align-items: center;
+  column-gap: 1rem;
+  font-size: var(--small-font-size);
+  font-weight: 500;
+  transition: .3s;
+}
+
+.nav__link i {
+  font-size: 1.15rem;
+}
+
+.nav__link:hover {
+  color: var(--title-color-dark);
+}
+
+.main {
+  position: relative;
+  background-color: var(--body-color);
+  transition: .4s;
+}
+
+.header {
+  width: 100%;
+  background-color: var(--body-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: .5s; 
+  z-index: var(--z-fixed);
+}
+
+.header__nav {
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__logo, .header__toggle {
+  color: var(--title-color);
+}
+
+.header__logo {
+  font-weight: 500;
+}
+
+.header__toggle {
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.header__toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--title-color);
+  background: var(--content-color);
+  padding: 10px;
+  border-radius: 50%
+}
+
+/* Show menu */
+.show-menu {
+  transform: translate(100%);
+}
+
+/* Change background header */
+.scroll-header {
+  box-shadow: 0 0 20px #0000005C;
+}
+
+/* Active link */
+.active-link {
+  color: var(--title-color-dark);
+}
+
+/*=============== ABOUT TUTORIAL ===============*/
+.about__tutorial {
+  position: fixed;
+  background: #00000000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(100%);
+  transition: transform 0.5s;
+  z-index: 9999;
+}
+
+.about__tutorial.show {
+  transform: translateY(0);
+}
+
+.about__content {
+  background: var(--container-color);
+  color: var(--text-color);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.content_area{
+  height: 25%;
+  width: 100%;
+}
+
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 320px) {
+  .container {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 767px) {
+  .show-menu {
+    transform: translate(40%);
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1024px) {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .section {
+    padding: 7rem 0 2rem;
+  }
+  .header__nav {
+    height: calc(var(--header-height) + 1.5rem);
+  }
+  .nav__shape {
+    width: 350px;
+    height: 350px;
+  }
+  .nav__mask {
+    width: 100px;
+    height: 100px;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+  }
+  .nav__img {
+    width: 90px;
+  }
+  .nav__link {
+    font-size: var(--normal-font-size);
+  }
+  .nav__link i {
+    font-size: 1.25rem;
+  }
+}
+
+
+form {
+  padding: 20px;
+  width: 100%;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+}
+
+input[type="email"],
+input[type="text"],
+textarea {
+  margin-bottom: 2px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+input[type="email"]:focus,
+input[type="text"]:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+input[type="text"].top{
+  border-radius: 15px 15px 4px 4px;  
+}
+
+textarea.bottom{
+  height: 20vh;
+  border-radius: 4px 4px 15px 15px;
+}
+button.form {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  color: var(--container-color);
+  background: var(--text-color-dark);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.support {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.paypal-button {
+  margin-top: 2px;
+  width: 90%;
+  display: inline-flex;
+  align-items: center;
+  background-color: #666666;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.paypal-button.top{
+border-radius: 15px 15px 4px 4px;  
+}
+.paypal-button.bottom{
+  border-radius: 4px 4px 15px 15px;
+}
+
+.paypal-button i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.paypal-button:hover {
+  background-color: #3C3C3C;
+}
+
+.tip{
+  margin-top: 10px;
+  text-align: center;
+}
